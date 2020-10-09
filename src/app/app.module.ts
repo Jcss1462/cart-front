@@ -9,13 +9,15 @@ import {HttpClientModule} from '@angular/common/http';
 //componentes
 import { CustomerListComponent } from './component/customer-list/customer-list.component';
 import { ProductListComponent } from './component/product-list/product-list.component';
+import { PaymentMethodComponent } from './component/payment-method/payment-method.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CustomerListComponent,
-    ProductListComponent
+    ProductListComponent,
+    PaymentMethodComponent
   ],
   imports: [
     BrowserModule,
