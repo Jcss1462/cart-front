@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/service/product.service';
 })
 export class ProductListComponent implements OnInit {
 
-  public titulo:string="Lista producto";
+  public titulo:string="Lista product";
 
   //creo un arreglo de product
   public products:Product[]
