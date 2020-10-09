@@ -3,16 +3,19 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CustomerListComponent } from './component/customer-list/customer-list.component';
-
 
 import {HttpClientModule} from '@angular/common/http';
+
+//componentes
+import { CustomerListComponent } from './component/customer-list/customer-list.component';
+import { ProductListComponent } from './component/product-list/product-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CustomerListComponent
+    CustomerListComponent,
+    ProductListComponent
   ],
   imports: [
     BrowserModule,

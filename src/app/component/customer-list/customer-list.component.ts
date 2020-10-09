@@ -9,7 +9,7 @@ import { CustomerService } from 'src/app/service/customer.service';
 })
 export class CustomerListComponent implements OnInit {
 
-  public titulo:string="Lista titulo";
+  public titulo:string="Lista customer";
 
   //creo un arreglo de curtomer
   public customers:Customer[]
