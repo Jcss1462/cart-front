@@ -4,10 +4,14 @@
     <tr>
         <td><b>Email</b></td>
         <td><b>Name</b></td>
+        <td><b>Opción</b></td>
     </tr>
 
     <tr *ngFor="let customer of customers">
         <td>{{customer.email}}</td>
         <td>{{customer.name}}</td>
+        <td>
+            <a [routerLink]="['/customer-edit',customer.email]">Editar</a>
+        </td>
     </tr>
 </table>
