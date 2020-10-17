@@ -1,3 +1,6 @@
+<br>
+<i routerLink="/payment-save" class="fas fa-plus-square"></i>
+
 <h3>{{titulo}}</h3>
 
 <table>
@@ -5,11 +8,15 @@
         <td><b>payId</b></td>
         <td><b>Name</b></td>
         <td><b>Enable</b></td>
+        <td><b>Opción</b></td>
     </tr>
 
     <tr *ngFor="let paymentMethod of paymentMethods">
         <td>{{paymentMethod.payId}}</td>
         <td>{{paymentMethod.name}}</td>
         <td>{{paymentMethod.enable}}</td>
+        <td>
+            <a [routerLink]="['/payment-edit',paymentMethod.payId]">Editar</a>
+        </td>
     </tr>
 </table>

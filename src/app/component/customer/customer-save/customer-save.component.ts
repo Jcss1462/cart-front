@@ -22,7 +22,7 @@ export class CustomerSaveComponent implements OnInit {
               public enableService: EnableService) { }
 
   ngOnInit(): void {
-    //al llamar este componente inicializo el customer vvacio, dejando enble en Y por defecto
+    //al llamar este componente inicializo el customer vacio, dejando enble en Y por defecto
     this.customer=new Customer("","","Y","","","");
     this.findAllEnable();
   }

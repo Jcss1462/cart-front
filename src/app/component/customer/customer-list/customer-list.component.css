@@ -1,0 +1,10 @@
+i{
+    
+    color:rgb(255, 0, 0);
+    font-size: 40px;
+    text-align: right;
+}
+i:hover{
+    cursor: pointer;
+    color: rgb(160, 0, 35);
+}

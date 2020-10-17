@@ -1,0 +1,21 @@
+<br>
+<i routerLink="/product-save" class="fas fa-plus-square"></i>
+<h3>{{titulo}}</h3>
+
+<table>
+    <tr>
+        <td><b>roId</b></td>
+        <td><b>Name</b></td>
+        <td><b>Enable</b></td>
+        <td><b>Opción</b></td>
+    </tr>
+
+    <tr *ngFor="let product of products">
+        <td>{{product.proId}}</td>
+        <td>{{product.name}}</td>
+        <td>{{product.enable}}</td>
+        <td>
+            <a [routerLink]="['/product-edit',product.proId]">Editar</a>
+        </td>
+    </tr>
+</table>
