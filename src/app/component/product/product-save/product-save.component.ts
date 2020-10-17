@@ -22,7 +22,7 @@ export class ProductSaveComponent implements OnInit {
 
   ngOnInit(): void {
     //al llamar este componente inicializo el product vvacio, dejando enble en Y por defecto
-    this.product = new Product("", "", "Y", "", "", 0);
+    this.product = new Product("", "", "Y", "", "", null);
     this.findAllEnable();
   }
 
