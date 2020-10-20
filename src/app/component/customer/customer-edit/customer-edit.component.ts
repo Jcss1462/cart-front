@@ -29,9 +29,6 @@ export class CustomerEditComponent implements OnInit {
     this.email = params.email
     console.log(this.email);
 
-    //inicializo el cutomer para eviar errores de desconocido
-    this.customer=new Customer("","","","","","");
-
     //traigo los enables
     this.findAllEnable();
     //obtengo la informacion del  customer que accedio
@@ -56,6 +53,20 @@ export class CustomerEditComponent implements OnInit {
       //si todo sale bien activo los mensajes
       this.showMsg=true;
       this.messages[0]="El customer se actualizo con exito";
+    },err=>{
+      //si algo sale mal activo los mensajes
+      //el segundo error el del back
+      this.showMsg=true;
+      this.messages=err.error.error;
+    });
+  }
+
+  public delete():void{
+    this.messages=[""];
+    this.customerService.deletete(this.customer.email).subscribe(ok=>{
+      //si todo sale bien activo los mensajes
+      this.showMsg=true;
+      this.messages[0]="El customer se borro con exito";
     },err=>{
       //si algo sale mal activo los mensajes
       //el segundo error el del back

@@ -2,6 +2,13 @@
 <i routerLink="/customer-save" class="fas fa-plus-square"></i>
 <h3>{{titulo}}</h3>
 
+<div *ngIf="showMsg">
+    <p *ngFor="let msg of messages">
+        {{msg}}
+    </p>
+</div>
+
+
 <table>
     <tr>
         <td><b>Email</b></td>
@@ -16,6 +23,7 @@
         <td>{{customer.enable}}</td>
         <td>
             <a [routerLink]="['/customer-edit',customer.email]">Editar</a>
+            <button (click)="delete(customer.email)">Borrar</button>
         </td>
     </tr>
 </table>

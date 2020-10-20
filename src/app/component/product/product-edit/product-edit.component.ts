@@ -30,9 +30,6 @@ export class ProductEditComponent implements OnInit {
     this.proId = params.proId
     console.log(this.proId);
 
-    //inicializo el product para eviar errores de desconocido
-    this.product=new Product("","","","","",null);
-
     //traigo los enables
     this.findAllEnable();
     //obtengo la informacion del  product que accedio

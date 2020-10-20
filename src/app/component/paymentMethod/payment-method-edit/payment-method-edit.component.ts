@@ -32,9 +32,6 @@ export class PaymentMethodEditComponent implements OnInit {
     this.payId = params.payId
     console.log(this.payId);
 
-    //inicializo el paymentMethod para eviar errores de desconocido
-    this.paymentMethod=new PaymentMethod(null,"","");
-
     //traigo los enables
     this.findAllEnable();
     //obtengo la informacion del  paymentMethod que accedio
