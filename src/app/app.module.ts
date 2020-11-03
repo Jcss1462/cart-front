@@ -19,6 +19,7 @@ import { ProductSaveComponent } from './component/product/product-save/product-s
 import { ProductEditComponent } from './component/product/product-edit/product-edit.component';
 import { PaymentMethodSaveComponent } from './component/paymentMethod/payment-method-save/payment-method-save.component';
 import { PaymentMethodEditComponent } from './component/paymentMethod/payment-method-edit/payment-method-edit.component';
+import { LoginComponent } from './component/login/login.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { PaymentMethodEditComponent } from './component/paymentMethod/payment-me
     ProductEditComponent,
     PaymentMethodSaveComponent,
     PaymentMethodEditComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

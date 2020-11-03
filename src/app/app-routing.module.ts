@@ -9,17 +9,23 @@ import { ProductEditComponent } from './component/product/product-edit/product-e
 import { PaymentMethodComponent } from './component/paymentMethod/payment-method/payment-method.component';
 import { PaymentMethodSaveComponent } from './component/paymentMethod/payment-method-save/payment-method-save.component';
 import { PaymentMethodEditComponent } from './component/paymentMethod/payment-method-edit/payment-method-edit.component';
+import { LoginComponent } from './component/login/login.component';
+import { AuthGuard } from './guard/auth.guard';
 
 const routes: Routes = [
-  {path:'customer-list',component:CustomerListComponent},
-  {path:'customer-save',component:CustomerSaveComponent},
-  {path:'customer-edit/:email',component:CustomerEditComponent},
-  {path:'product-list',component:ProductListComponent},
-  {path:'product-save',component:ProductSaveComponent},
-  {path:'product-edit/:proId',component:ProductEditComponent},
-  {path:'payment-list',component:PaymentMethodComponent},
-  {path:'payment-save',component:PaymentMethodSaveComponent},
-  {path:'payment-edit/:payId',component:PaymentMethodEditComponent},
+  //rutas que requieren de autenticacion para acceder
+  {path:'customer-list',component:CustomerListComponent,canActivate:[AuthGuard]},
+  {path:'customer-save',component:CustomerSaveComponent,canActivate:[AuthGuard]},
+  {path:'customer-edit/:email',component:CustomerEditComponent,canActivate:[AuthGuard]},
+  {path:'product-list',component:ProductListComponent,canActivate:[AuthGuard]},
+  {path:'product-save',component:ProductSaveComponent,canActivate:[AuthGuard]},
+  {path:'product-edit/:proId',component:ProductEditComponent,canActivate:[AuthGuard]},
+  {path:'payment-list',component:PaymentMethodComponent,canActivate:[AuthGuard]},
+  {path:'payment-save',component:PaymentMethodSaveComponent,canActivate:[AuthGuard]},
+  {path:'payment-edit/:payId',component:PaymentMethodEditComponent,canActivate:[AuthGuard]},
+  
+  {path:'login',component:LoginComponent},
+  {path:'',component:LoginComponent}
 ];
 
 @NgModule({
