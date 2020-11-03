@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "cart-empresariales-front": {
+      "hosting": {
+        "cart-front": [
+          "cart-empresariales-front"
+        ]
+      }
+    }
+  }
+}
