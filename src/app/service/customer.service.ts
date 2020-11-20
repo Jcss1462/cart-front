@@ -12,8 +12,12 @@ export class CustomerService {
   //coloco la ruta del servicio a partir  del api colocado en el archivo enviroment
   private url:string=environment.apiUrl+"api/customer/";
 
+  private headers;
+
   //inyecto http
-  constructor(public httpClient:HttpClient) {}
+  constructor(public httpClient:HttpClient) {
+    this.headers=this.createTokenHeader();
+  }
 
   //coloco el token como header
   createTokenHeader():HttpHeaders{
@@ -26,28 +30,23 @@ export class CustomerService {
   }
 
   public findAll():Observable<any>{
-    let headers=this.createTokenHeader();
-    return this.httpClient.get(this.url+'findAll',{headers:headers});
+    return this.httpClient.get(this.url+'findAll',{headers:this.headers});
   }
 
   public findById(email:string):Observable<any>{
-    let headers=this.createTokenHeader();
-    return this.httpClient.get(this.url+'findById/'+email,{headers:headers});
+    return this.httpClient.get(this.url+'findById/'+email,{headers:this.headers});
   }
 
   public save(customer:Customer):Observable<any>{
-    let headers=this.createTokenHeader();
-    return this.httpClient.post(this.url+'save',customer,{headers:headers});
+    return this.httpClient.post(this.url+'save',customer,{headers:this.headers});
   }
 
   public update(customer:Customer):Observable<any>{
-    let headers=this.createTokenHeader();
-    return this.httpClient.put(this.url+'update',customer,{headers:headers});
+    return this.httpClient.put(this.url+'update',customer,{headers:this.headers});
   }
 
   public deletete(email:string):Observable<any>{
-    let headers=this.createTokenHeader();
-    return this.httpClient.delete(this.url+'delete/'+email,{headers:headers});
+    return this.httpClient.delete(this.url+'delete/'+email,{headers:this.headers});
   }
 
 }
