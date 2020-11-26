@@ -15,7 +15,7 @@ import { AuthGuard } from './guard/auth.guard';
 const routes: Routes = [
   //rutas que requieren de autenticacion para acceder
   {path:'customer-list',component:CustomerListComponent,canActivate:[AuthGuard]},
-  {path:'customer-save',component:CustomerSaveComponent,canActivate:[AuthGuard]},
+  {path:'customer-save',component:CustomerSaveComponent},
   {path:'customer-edit/:email',component:CustomerEditComponent,canActivate:[AuthGuard]},
   {path:'product-list',component:ProductListComponent,canActivate:[AuthGuard]},
   {path:'product-save',component:ProductSaveComponent,canActivate:[AuthGuard]},

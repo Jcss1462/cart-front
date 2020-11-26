@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { User } from '../domain/user';
@@ -13,7 +14,7 @@ export class AuthService {
   private url:string=environment.apiUrl+'login'
 
   //inyecto el httpClient
-  constructor(public httpClient:HttpClient) {}
+  constructor(public httpClient:HttpClient, public angularFireAuth:AngularFireAuth) {}
 
   public loginUser(user:User):Observable<any>{
     return this.httpClient.post(this.url,user);
@@ -25,6 +26,11 @@ export class AuthService {
 
   public logOut():void{
     localStorage.removeItem('usuario');
+  }
+
+  //crea un usuario en firebase
+  public createUser(email:string,password:string){
+    return this.angularFireAuth.createUserWithEmailAndPassword(email,password);
   }
 
 }

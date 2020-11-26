@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Customer } from 'src/app/domain/customer';
 import { Enable } from 'src/app/domain/enable';
+import { AuthService } from 'src/app/service/auth.service';
 import { CustomerService } from 'src/app/service/customer.service';
 import { EnableService } from 'src/app/service/enable.service';
 
@@ -14,11 +15,10 @@ export class CustomerSaveComponent implements OnInit {
   public customer:Customer;
   public enables:Enable[];
 
-  public showMsg:boolean=false;
-  public messages:string[]=[""];
-
+ 
   //inyecto el servicio de customer y el servicio local de enable
   constructor(public customerService:CustomerService,
+              public autSrevice:AuthService,
               public enableService: EnableService) { }
 
   ngOnInit(): void {
@@ -34,16 +34,11 @@ export class CustomerSaveComponent implements OnInit {
 
   //guardo cuando oprimo el boton
   public save():void{
-    this.messages=[""];
     this.customerService.save(this.customer).subscribe(ok=>{
-      //si todo sale bien activo los mensajes
-      this.showMsg=true;
-      this.messages[0]="El customer se grabo con exito";
+      alert("El customer se grabo con exito");
     },err=>{
-      //si algo sale mal activo los mensajes
       //el segundo error el del back
-      this.showMsg=true;
-      this.messages=err.error.error;
+      alert(err.error.error);
     });
   }
 
