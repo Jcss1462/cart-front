@@ -11,8 +11,7 @@ import { AuthService } from 'src/app/service/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  public showMsg: boolean = false;
-  public messages: string[] = [""];
+
 
   //traigo la clase User
   public user: User;
@@ -36,8 +35,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/customer-list']);
     }, err => {
       console.log("error");
-      this.showMsg = true;
-      this.messages = ["Usuario o clave no son validos"];
+      alert("Usuario o clave no son validos");
     }
     )
   }
