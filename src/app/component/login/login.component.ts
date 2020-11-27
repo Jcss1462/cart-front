@@ -26,6 +26,13 @@ export class LoginComponent implements OnInit {
 
   public ingresar(): void {
 
+    this.authService.loginFireBase(this.user)
+    .then(()=>{
+      alert("secion firebase iniciada");
+    }).catch(e=>{
+      alert(e.message);
+    });
+    /*
     this.authService.loginUser(this.user).subscribe(data => {
       //guardo la informacion del usuario en el local storage
       localStorage.setItem("usuario", JSON.stringify(this.user));
@@ -37,7 +44,7 @@ export class LoginComponent implements OnInit {
       console.log("error");
       alert("Usuario o clave no son validos");
     }
-    )
+    )*/
   }
 
 }

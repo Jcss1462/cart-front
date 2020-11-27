@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Customer } from 'src/app/domain/customer';
 import { Enable } from 'src/app/domain/enable';
 import { AuthService } from 'src/app/service/auth.service';
@@ -19,7 +20,8 @@ export class CustomerSaveComponent implements OnInit {
   //inyecto el servicio de customer y el servicio local de enable
   constructor(public customerService:CustomerService,
               public autSrevice:AuthService,
-              public enableService: EnableService) { }
+              public enableService: EnableService,
+              public router:Router) { }
 
   ngOnInit(): void {
     //al llamar este componente inicializo el customer vacio, dejando enble en Y por defecto
@@ -34,12 +36,24 @@ export class CustomerSaveComponent implements OnInit {
 
   //guardo cuando oprimo el boton
   public save():void{
+
+    this.autSrevice.createUser(this.customer.email,this.customer.token)
+    .then(()=>{
+      alert("usuario registrado exitozamente en firebase");
+      this.autSrevice.sendEmailVerification;
+      this.router.navigate(['/login']);
+    }).catch(e=>{
+      alert(e.message);
+    });
+
+    /** 
     this.customerService.save(this.customer).subscribe(ok=>{
       alert("El customer se grabo con exito");
     },err=>{
       //el segundo error el del back
       alert(err.error.error);
     });
+    */
   }
 
 }

@@ -16,6 +16,7 @@ export class AuthService {
   //inyecto el httpClient
   constructor(public httpClient:HttpClient, public angularFireAuth:AngularFireAuth) {}
 
+  //loginBack
   public loginUser(user:User):Observable<any>{
     return this.httpClient.post(this.url,user);
   }
@@ -28,9 +29,25 @@ export class AuthService {
     localStorage.removeItem('usuario');
   }
 
+  /////////////////////////////////////////////////////////////////
+  //firebase
   //crea un usuario en firebase
   public createUser(email:string,password:string){
     return this.angularFireAuth.createUserWithEmailAndPassword(email,password);
   }
+
+  //login firebase
+  public loginFireBase(user:User){
+    return this.angularFireAuth.signInWithEmailAndPassword(user.username,user.password);
+  }
+
+  public logOutFirebase(user:User){
+    return this.angularFireAuth.signOut();
+  }
+
+  public async sendEmailVerification(){
+    await (await this.angularFireAuth.currentUser).sendEmailVerification();
+  }
+
 
 }
