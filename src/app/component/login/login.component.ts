@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/domain/user';
 import { AuthService } from 'src/app/service/auth.service';
+import { CustomerService } from 'src/app/service/customer.service';
 
 @Component({
   selector: 'app-login',
@@ -15,44 +16,63 @@ export class LoginComponent implements OnInit {
 
   //traigo la clase User
   public user: User;
+  public userToken: User;
+
 
   //inyecto el auth service
-  constructor(private router: Router, private authService: AuthService) { }
+  constructor(private router: Router, private authService: AuthService, private customerService: CustomerService) { }
 
   ngOnInit(): void {
     //inicializo user con valores por defecto
-    this.user = new User("admin", "password");
+    this.user = new User("", "");
+    this.userToken = new User("", "");
   }
 
   public ingresar(): void {
 
+    //inicio secion en firebase
     this.authService.loginFireBase(this.user)
-    .then((data)=>{
-      
-      console.log(data.user.uid);
-      if(data.user.emailVerified==false){
-        alert("Email no verificado");
-      }else{
-        alert("secion firebase iniciada");
-        //this.router.navigate(['/customer-list']);
-      }
+      .then((data) => {
 
-    }).catch(e=>{
-      alert(e.message);
-    });
-    /*
-    this.authService.loginUser(this.user).subscribe(data => {
-      //guardo la informacion del usuario en el local storage
-      localStorage.setItem("usuario", JSON.stringify(this.user));
-      //coloco el token en el localstorage
-      localStorage.setItem("token", data.token);
-      //redirijo a customer-list
-      this.router.navigate(['/customer-list']);
-    }, err => {
-      console.log("error");
-      alert("Usuario o clave no son validos");
-    }
-    )*/
+        console.log(data.user.uid);
+        if (data.user.emailVerified == false) {
+          alert("Email no verificado");
+        } else {
+          alert("secion firebase iniciada");
+          //creo una copia del user para que el token no aparezca en el front
+          this.userToken.username = this.user.username;
+          this.userToken.password = data.user.uid;
+          //obtengo el token
+          this.authService.loginUser(this.userToken).subscribe(token => {
+            //guardo la informacion del usuario en el local storage
+            localStorage.setItem("usuario", JSON.stringify(this.userToken));
+            //coloco el token en el localstorage
+            localStorage.setItem("token", token.token);
+
+            //reviso el tipo de usuario
+            this.customerService.findByIdWithHeaders(this.userToken.username).subscribe(userInfo => {
+              localStorage.setItem("usuarioInfo", JSON.stringify(userInfo));
+              if(userInfo.customerType==1){
+                this.router.navigate(['/customer-list']);
+              }else{
+                this.router.navigate(['/customer-save']);
+              }
+
+            },e=>{
+              alert("error encontrndo el usuario en el back "+e.message);
+            });
+
+           
+          }, err => {
+            console.log("error");
+            alert("error obteniendo el token"+"Usuario o clave no son validos");
+          });
+        }
+
+      }).catch(e => {
+        alert("error iniciando secion firebase"+e.message);
+      });
+
   }
 
 }

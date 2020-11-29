@@ -37,6 +37,11 @@ export class CustomerService {
     return this.httpClient.get(this.url+'findById/'+email,{headers:this.headers});
   }
 
+  public findByIdWithHeaders(email:string):Observable<any>{
+    this.headers=this.createTokenHeader();
+    return this.httpClient.get(this.url+'findById/'+email,{headers:this.headers});
+  }
+
   public save(customer:Customer):Observable<any>{
     return this.httpClient.post(this.url+'save',customer,{headers:this.headers});
   }
