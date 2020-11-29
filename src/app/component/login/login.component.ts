@@ -27,8 +27,16 @@ export class LoginComponent implements OnInit {
   public ingresar(): void {
 
     this.authService.loginFireBase(this.user)
-    .then(()=>{
-      alert("secion firebase iniciada");
+    .then((data)=>{
+      
+      console.log(data.user.uid);
+      if(data.user.emailVerified==false){
+        alert("Email no verificado");
+      }else{
+        alert("secion firebase iniciada");
+        //this.router.navigate(['/customer-list']);
+      }
+
     }).catch(e=>{
       alert(e.message);
     });

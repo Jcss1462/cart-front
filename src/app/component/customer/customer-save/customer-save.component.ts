@@ -13,47 +13,59 @@ import { EnableService } from 'src/app/service/enable.service';
 })
 export class CustomerSaveComponent implements OnInit {
 
-  public customer:Customer;
-  public enables:Enable[];
+  public customer: Customer;
+  public enables: Enable[];
 
- 
+
   //inyecto el servicio de customer y el servicio local de enable
-  constructor(public customerService:CustomerService,
-              public autSrevice:AuthService,
-              public enableService: EnableService,
-              public router:Router) { }
+  constructor(public customerService: CustomerService,
+    public autSrevice: AuthService,
+    public enableService: EnableService,
+    public router: Router) { }
 
   ngOnInit(): void {
     //al llamar este componente inicializo el customer vacio, dejando enble en Y por defecto
-    this.customer=new Customer("","","Y","","","");
+    this.customer = new Customer("", "", "Y", "", "", "");
     this.findAllEnable();
   }
 
   //lleno mi arreglo de enables con los del servicio
-  public findAllEnable():void{
-    this.enables=this.enableService.findAll();
+  public findAllEnable(): void {
+    this.enables = this.enableService.findAll();
   }
 
   //guardo cuando oprimo el boton
-  public save():void{
+  public save(): void {
 
-    this.autSrevice.createUser(this.customer.email,this.customer.token)
-    .then(()=>{
-      alert("usuario registrado exitozamente en firebase");
-      this.autSrevice.sendEmailVerification;
-      this.router.navigate(['/login']);
-    }).catch(e=>{
-      alert(e.message);
-    });
 
-    /** 
-    this.customerService.save(this.customer).subscribe(ok=>{
-      alert("El customer se grabo con exito");
-    },err=>{
+    //valido y guardo los datos en el back
+    this.customerService.save(this.customer).subscribe(ok => {
+      
+      alert("El customer se grabo con exito en el back");
+      //si todo sale bien registro en firebase
+      this.autSrevice.createUser(this.customer.email, this.customer.token)
+        .then((data) => {
+          alert("usuario registrado exitozamente en firebase");
+          this.autSrevice.sendEmailVerification();
+
+          //actualizo el token en el back
+          this.customer.token=data.user.uid;
+          this.customerService.update(this.customer).subscribe(ok=>{
+            alert("Proceso terminado satisfactoriamente");
+            this.router.navigate(['/login']);
+          }, err=>{
+            alert(err.error.error);
+          });
+
+        }).catch(e => {
+          alert(e.message);
+        });
+      
+    }, err => {
       //el segundo error el del back
       alert(err.error.error);
     });
-    */
+
   }
 
 }
