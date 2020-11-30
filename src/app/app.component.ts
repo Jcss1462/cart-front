@@ -13,4 +13,10 @@ export class AppComponent {
     return !!localStorage.getItem('usuario');
   }
 
+  public activarOpt(): void {
+    let activador= document.getElementById("selectSpace");
+    activador.classList.toggle('active');
+  }
+
+
 }

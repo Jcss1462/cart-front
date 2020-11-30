@@ -26,6 +26,7 @@ import { LoginComponent } from './component/login/login.component';
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from 'src/environments/environment';
+import { StoreComponent } from './component/store/store.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {environment} from 'src/environments/environment';
     PaymentMethodSaveComponent,
     PaymentMethodEditComponent,
     LoginComponent,
+    StoreComponent,
   ],
   imports: [
     BrowserModule,
