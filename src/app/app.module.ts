@@ -27,6 +27,7 @@ import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from 'src/environments/environment';
 import { StoreComponent } from './component/store/store.component';
+import { PesosTransformPipe } from './pipes/pesos-transform.pipe';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { StoreComponent } from './component/store/store.component';
     PaymentMethodEditComponent,
     LoginComponent,
     StoreComponent,
+    PesosTransformPipe,
   ],
   imports: [
     BrowserModule,

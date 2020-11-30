@@ -1,1 +1,19 @@
-<p>store works!</p>
+<div id="container">
+    <div class="wrapper">
+        <div class="item" *ngFor="let product of products">
+            <div id="fotoBox">
+                <img src={{product.image}}>
+            </div>
+            <div class ="info">{{product.name}}</div>
+            <div class ="info"><b>{{product.price|pesosTransform}}</b></div>
+            <div id="optBox">
+                <div class="opt">
+                    <i class="far fa-eye"></i>
+                </div>
+                <div class="opt">
+                    <i class="fas fa-cart-plus"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
