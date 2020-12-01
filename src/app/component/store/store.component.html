@@ -1,14 +1,14 @@
-<div id="container">
+<div id="container" (click)="closeAniwhere($event)">
     <div class="wrapper">
         <div class="item" *ngFor="let product of products">
             <div id="fotoBox">
                 <img src={{product.image}}>
             </div>
-            <div class ="info">{{product.name}}</div>
-            <div class ="info"><b>{{product.price|pesosTransform}}</b></div>
+            <div class="info">{{product.name}}</div>
+            <div class="info"><b>{{product.price|pesosTransform}}</b></div>
             <div id="optBox">
                 <div class="opt">
-                    <i class="far fa-eye"></i>
+                    <i class="far fa-eye" (click)="openView(product)"></i>
                 </div>
                 <div class="opt">
                     <i class="fas fa-cart-plus"></i>
@@ -16,4 +16,36 @@
             </div>
         </div>
     </div>
+
+    <!--view dialog-->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content" *ngIf="productView">
+
+            <div id="header">
+                <i class="fas fa-window-close" (click)="closeView()"></i>
+            </div>
+
+            <div id="body">
+                <div id="imageBox">
+                    <img src={{productView.image}}>
+                </div>
+
+                <div id="infoBox">
+                    <div id="title">
+                        <b>{{productView.name}}</b>
+                    </div>
+                    <div id="detail">
+                        {{productView.detail}}
+                    </div>
+                    <div id="price">
+                        <b>{{productView.price|pesosTransform}}</b>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
