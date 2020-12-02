@@ -11,6 +11,8 @@ import { PaymentMethodSaveComponent } from './component/paymentMethod/payment-me
 import { PaymentMethodEditComponent } from './component/paymentMethod/payment-method-edit/payment-method-edit.component';
 import { LoginComponent } from './component/login/login.component';
 import { StoreComponent } from './component/store/store.component';
+import { ShopingProductInfoComponent } from './component/cart/shoping-product-info/shoping-product-info.component';
+
 
 //usrare el guard de firebase
 //import { AuthGuard } from './guard/auth.guard';
@@ -32,6 +34,7 @@ const routes: Routes = [
   {path:'payment-edit/:payId',component:PaymentMethodEditComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   
   {path:'store',component:StoreComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'ShopingProductInfo/:carId',component:ShopingProductInfoComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
 
   {path:'login',component:LoginComponent},
   {path:'',component:LoginComponent}

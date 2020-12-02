@@ -20,14 +20,17 @@ import { ProductEditComponent } from './component/product/product-edit/product-e
 import { PaymentMethodSaveComponent } from './component/paymentMethod/payment-method-save/payment-method-save.component';
 import { PaymentMethodEditComponent } from './component/paymentMethod/payment-method-edit/payment-method-edit.component';
 import { LoginComponent } from './component/login/login.component';
-
+import { StoreComponent } from './component/store/store.component';
+import { ShopingProductInfoComponent } from './component/cart/shoping-product-info/shoping-product-info.component';
 
 //angular fire
 import {AngularFireModule} from '@angular/fire';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import {environment} from 'src/environments/environment';
-import { StoreComponent } from './component/store/store.component';
+
 import { PesosTransformPipe } from './pipes/pesos-transform.pipe';
+
+
 
 
 @NgModule({
@@ -45,6 +48,7 @@ import { PesosTransformPipe } from './pipes/pesos-transform.pipe';
     LoginComponent,
     StoreComponent,
     PesosTransformPipe,
+    ShopingProductInfoComponent,
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Customer } from 'src/app/domain/customer';
 import { Enable } from 'src/app/domain/enable';
 import { AuthService } from 'src/app/service/auth.service';
+import { CartService } from 'src/app/service/cart.service';
 import { CustomerService } from 'src/app/service/customer.service';
 import { EnableService } from 'src/app/service/enable.service';
 
@@ -21,7 +22,8 @@ export class CustomerSaveComponent implements OnInit {
   constructor(public customerService: CustomerService,
     public autSrevice: AuthService,
     public enableService: EnableService,
-    public router: Router) { }
+    public router: Router,
+    public cartService: CartService) { }
 
   ngOnInit(): void {
     //al llamar este componente inicializo el customer vacio, dejando enble en Y por defecto
@@ -51,8 +53,16 @@ export class CustomerSaveComponent implements OnInit {
           //actualizo el token en el back
           this.customer.token=data.user.uid;
           this.customerService.update(this.customer).subscribe(ok=>{
-            alert("Proceso terminado satisfactoriamente");
-            this.router.navigate(['/login']);
+            alert("Proceso de registro satisfactoriamente");
+            console.log(ok);
+            //le creo al usuario su primer shopingCart
+            this.cartService.createCart(ok).subscribe(i=>{
+              alert("Shoping cart creado satisfactoriamente");
+              this.router.navigate(['/login']);
+            },err=>{
+              alert("error al crear el shoping cart inicial: "+err.error.error);
+            });
+            
           }, err=>{
             alert(err.error.error);
           });
