@@ -4,6 +4,7 @@ export class ShopingCart {
         public carId:Number,
         public total:Number,
         public enable:string,
+        public items:Number,
     ){
         
     }

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Customer } from '../domain/customer';
+import { NewProduct } from '../domain/newProduct';
 
 @Injectable({
   providedIn: 'root'
@@ -38,11 +39,22 @@ export class CartService {
     return this.httpClient.get(this.url+'currentCart/'+email,{headers:this.headers});
   }
 
+  public getShopingCartById(cartId:string):Observable<any>{
+    return this.httpClient.get(this.url+'findCartById/'+cartId,{headers:this.headers});
+  }
+
+
   public getShopingProducts(cartId:string):Observable<any>{
     return this.httpClient.get(this.url+'findShopingProductsByCartId/'+cartId,{headers:this.headers});
   }
 
+  public addProduct(newProduct:NewProduct):Observable<any>{
+    return this.httpClient.post(this.url+'addProduct',newProduct,{headers:this.headers});
+  }
 
+  public removeProduct(cartId:Number,proId:String):Observable<any>{
+    return this.httpClient.delete(this.url+'removeProduct/'+cartId+"/"+proId,{headers:this.headers});
+  }
 
 
 }

@@ -23,7 +23,7 @@ export class AppComponent {
   }
 
   public goToShopingProduct(): void {
-    let em=JSON.parse(localStorage.getItem("user")).email;
+    let em=JSON.parse(localStorage.getItem("usuarioInfo")).email;
     this.cartService.getCurrentCart(em).subscribe(data=>{
       
       //console.log(data);

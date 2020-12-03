@@ -5,12 +5,23 @@
         <div id="productContainer">
             <h1><b>Shoping Products</b></h1>
 
+            <div id="titles">
+
+                <div class="titleFoto"><b>Imagen</b></div>
+                <div class="titleText"><b>Producto/Precio</b></div>
+                <div class="titleText"><b>Cantidad añadida</b></div>
+                <div class="titleText"><b>Costo total</b></div>
+                <div class="delText"></div>
+
+            </div>
             <div class="item" *ngFor="let shopingProduct of shopingProducts">
-                <div id="fotoBox"></div>
-                <div id="ProductName" class="infoText"><b>j j</b></div>
+                <div id="fotoBox">
+                    <img src={{shopingProduct.proImg}}>
+                </div>
+                <div id="ProductName" class="infoText"><b>{{shopingProduct.proName}}<br>{{shopingProduct.price|pesosTransform}}</b></div>
                 <div id="Cantidad" class="infoText"><b>X{{shopingProduct.quantity}}</b></div>
                 <div id="total" class="infoText"><b>{{shopingProduct.total|pesosTransform}}</b></div>
-                <div id="delete" class="delet"><b><i class="far fa-trash-alt"></i></b></div>
+                <div id="delete" class="delet"><b><i class="far fa-trash-alt"  (click)="removeProduct(shopingProduct.proId)"></i></b></div>
             </div>
 
         </div>
@@ -23,7 +34,7 @@
 
             <div id="priceBox">
                 <h2>Total</h2>
-                <h1>55</h1>
+                <h1 *ngIf="shopingCartInfo">{{shopingCartInfo.total|pesosTransform}}</h1>
             </div>
 
         </div>

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { NewProduct } from 'src/app/domain/newProduct';
 import { Product } from 'src/app/domain/product';
+import { CartService } from 'src/app/service/cart.service';
 import { ProductService } from 'src/app/service/product.service';
 
 @Component({
@@ -13,12 +15,15 @@ export class StoreComponent implements OnInit {
   public products: Product[];
 
   public productView: Product;
+
+  public newProduct: NewProduct;
+
   //inyecto el servicio
-  constructor(public productService: ProductService) { }
+  constructor(public productService: ProductService, public cartService: CartService) { }
 
   ngOnInit(): void {
     this.findAllEnable();
-    this.productView=null;
+    this.productView = null;
   }
 
   findAllEnable(): void {
@@ -32,10 +37,10 @@ export class StoreComponent implements OnInit {
     });
   }
 
-  openView(product:Product) {
+  openView(product: Product) {
     var modal = document.getElementById("myModal");
     modal.style.display = "block";
-    this.productView=product;
+    this.productView = product;
   }
 
   // When the user clicks on <span> (x), close the modal
@@ -50,6 +55,31 @@ export class StoreComponent implements OnInit {
     if (event.target == modal) {
       modal.style.display = "none";
     }
+  }
+
+
+  addProduct(proId: string) {
+    this.newProduct = new NewProduct("", 0);
+    //obtengo el cart actual
+    let em = JSON.parse(localStorage.getItem("usuarioInfo")).email;
+    this.cartService.getCurrentCart(em).subscribe(data => {
+
+      //añado el producto
+      this.newProduct.cartId = data.carId;
+      this.newProduct.proId = proId;
+
+      this.cartService.addProduct(this.newProduct).subscribe(data => {
+        alert("Producto añadido exitoxamente");
+      }, error => {
+        //si hay error, lo imprimo en la consola
+        alert(error)
+      });
+
+    }, error => {
+      //si hay error, lo imprimo en la consola
+      console.error(error)
+    });
+
   }
 
 }

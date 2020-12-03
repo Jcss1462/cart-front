@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { PaymentMethod } from 'src/app/domain/payment-method';
+import { ShopingCart } from 'src/app/domain/shopingCart';
 import { ShopingProduct } from 'src/app/domain/shopingProduct';
 import { CartService } from 'src/app/service/cart.service';
 import { PaymentMethodService } from 'src/app/service/payment-method.service';
@@ -15,6 +16,8 @@ export class ShopingProductInfoComponent implements OnInit {
   public shopingProducts: ShopingProduct[];
   public paymentMethodList: PaymentMethod[];
   public carId:string;
+  public shopingCartInfo:ShopingCart;
+
 
   constructor(public router: Router,
     public activedRoute: ActivatedRoute,
@@ -27,6 +30,14 @@ export class ShopingProductInfoComponent implements OnInit {
     let params = this.activedRoute.params['_value'];
     this.carId = params.carId;
     console.log(this.carId);
+
+    //obtengo la informacion del shoping cart
+    this.cartService.getShopingCartById(this.carId).subscribe(ok=>{
+      this.shopingCartInfo=ok;
+    },err=>{
+      alert("error")
+    });
+
 
     //obtengo los shoping productos del shoping cart
     this.getSopingProducts();
@@ -46,6 +57,15 @@ export class ShopingProductInfoComponent implements OnInit {
   public getPaymentMethodnables(){
     this.paymentMethod.findByEnable().subscribe(ok=>{
       this.paymentMethodList=ok;
+    },err=>{
+      alert("error")
+    });
+  }
+
+  public removeProduct(proId:string){
+    this.cartService.removeProduct(this.shopingCartInfo.carId,proId).subscribe(ok=>{
+      alert("producto eliminado exitozamente");
+      this.ngOnInit();
     },err=>{
       alert("error")
     });
