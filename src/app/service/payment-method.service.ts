@@ -33,6 +33,10 @@ export class PaymentMethodService {
       return this.httpClient.get(this.url+'findAll',{headers:this.headers});
   }
 
+  public findByEnable():Observable<any>{
+    return this.httpClient.get(this.url+'findByEnable',{headers:this.headers});
+  } 
+
   public findById(payId:string):Observable<any>{
     return this.httpClient.get(this.url+'findById/'+payId,{headers:this.headers});
   }

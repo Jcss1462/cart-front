@@ -38,6 +38,10 @@ export class CartService {
     return this.httpClient.get(this.url+'currentCart/'+email,{headers:this.headers});
   }
 
+  public getShopingProducts(cartId:string):Observable<any>{
+    return this.httpClient.get(this.url+'findShopingProductsByCartId/'+cartId,{headers:this.headers});
+  }
+
 
 
 
