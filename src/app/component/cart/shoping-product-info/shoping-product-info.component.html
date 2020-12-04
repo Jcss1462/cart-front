@@ -1,4 +1,4 @@
-<div id="container">
+<div id="container" (click)="closeAniwhere($event)">
 
     <div id="productsView">
 
@@ -44,13 +44,38 @@
             <div id="payBox">
 
                 <form #PayForm="ngForm">
-                    <input readonly type="number" name="numberCart" id="numberCart" #numberCart placeholder="# tarjeta" />
-                    <select name="enable" id="enable" #enable>
+                    <input  type="number" name="numberCart" id="numberCart" #numberCart placeholder="# tarjeta" [(ngModel)]="payCartData.cartNumber"/>
+                    <select name="enable" id="enable" #enable  [(ngModel)]="payCartData.payId" >
+                        <option value=null disabled selected>Método de pago</option>
                         <option *ngFor="let pay of paymentMethodList" [value]="pay.payId">{{pay.name}}</option>
                     </select>
                     <br>
-                    <button >Comprar</button>
+                    <button (click)="openView()">Comprar</button>
                 </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!--dialog comfirm-->
+    <!--view dialog-->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+            <div id="header">
+                <i class="fas fa-window-close" (click)="closeView()"></i>
+            </div>
+            <div id="body">
+
+                <div id="textBox">
+                    <b>¿estas seguro que deseas comprar todo lo que hay <br> en el carro de compras?</b>
+                </div>
+                <div id="buttoBox">
+                    <button id="si" (click)="payCart()">Si</button>
+                    <button id="no" (click)="closeView()">No</button>
+                </div>
 
             </div>
 

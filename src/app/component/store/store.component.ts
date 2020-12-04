@@ -39,7 +39,7 @@ export class StoreComponent implements OnInit {
 
   openView(product: Product) {
     var modal = document.getElementById("myModal");
-    modal.style.display = "block";
+    modal.style.display = "flex";
     this.productView = product;
   }
 

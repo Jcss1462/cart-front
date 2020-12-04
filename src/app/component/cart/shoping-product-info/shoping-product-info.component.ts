@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PayCartData } from 'src/app/domain/payCartData';
 import { PaymentMethod } from 'src/app/domain/payment-method';
 import { ShopingCart } from 'src/app/domain/shopingCart';
 import { ShopingProduct } from 'src/app/domain/shopingProduct';
@@ -18,6 +19,8 @@ export class ShopingProductInfoComponent implements OnInit {
   public carId:string;
   public shopingCartInfo:ShopingCart;
 
+  public payCartData:PayCartData;
+
 
   constructor(public router: Router,
     public activedRoute: ActivatedRoute,
@@ -35,7 +38,7 @@ export class ShopingProductInfoComponent implements OnInit {
     this.cartService.getShopingCartById(this.carId).subscribe(ok=>{
       this.shopingCartInfo=ok;
     },err=>{
-      alert("error")
+      alert(err.error.error)
     });
 
 
@@ -44,13 +47,16 @@ export class ShopingProductInfoComponent implements OnInit {
 
     //obtengo los peyment method enables
     this.getPaymentMethodnables();
+
+    //seteo la informacion de pago en vacio
+    this.payCartData=new PayCartData(null,null,null);
   }
 
   public getSopingProducts(){
     this.cartService.getShopingProducts(this.carId).subscribe(ok=>{
       this.shopingProducts=ok;
     },err=>{
-      alert("error")
+      alert(err.error.error)
     });
   }
 
@@ -58,7 +64,7 @@ export class ShopingProductInfoComponent implements OnInit {
     this.paymentMethod.findByEnable().subscribe(ok=>{
       this.paymentMethodList=ok;
     },err=>{
-      alert("error")
+      alert(err.error.error)
     });
   }
 
@@ -67,8 +73,43 @@ export class ShopingProductInfoComponent implements OnInit {
       alert("producto eliminado exitozamente");
       this.ngOnInit();
     },err=>{
-      alert("error")
+      alert(err.error.error)
     });
+  }
+
+  public payCart(){
+    //seteo el cartId
+    this.payCartData.cartId=this.shopingCartInfo.carId;
+    //pago el carro
+    this.cartService.payCart(this.payCartData).subscribe(ok=>{
+      console.log(ok)
+      alert("Compra realizada satisfactoriamente");
+      //redirigir
+      this.router.navigate(['/store']);
+    },err=>{
+      alert(err.error.error);
+    });
+  }
+
+
+  //dialog comfirm
+  openView() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "flex";
+  }
+
+  // When the user clicks on <span> (x), close the modal
+  closeView() {
+    var modal = document.getElementById("myModal");
+    modal.style.display = "none";
+  }
+
+  // When the user clicks anywhere outside of the modal, close it
+  closeAniwhere(event) {
+    var modal = document.getElementById("myModal");
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
   }
 
 }

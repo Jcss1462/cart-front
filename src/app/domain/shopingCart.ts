@@ -5,6 +5,9 @@ export class ShopingCart {
         public total:Number,
         public enable:string,
         public items:Number,
+        public cartNumber:Number,
+        public payId:Number,
+        public payName:string,
     ){
         
     }

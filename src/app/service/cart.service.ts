@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Customer } from '../domain/customer';
 import { NewProduct } from '../domain/newProduct';
+import { PayCartData } from '../domain/payCartData';
 
 @Injectable({
   providedIn: 'root'
@@ -54,6 +55,10 @@ export class CartService {
 
   public removeProduct(cartId:Number,proId:String):Observable<any>{
     return this.httpClient.delete(this.url+'removeProduct/'+cartId+"/"+proId,{headers:this.headers});
+  }
+
+  public payCart(payCartData:PayCartData):Observable<any>{
+    return this.httpClient.put(this.url+'payCart',payCartData,{headers:this.headers});
   }
 
 
