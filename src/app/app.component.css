@@ -34,14 +34,36 @@
   font-size: 40px;
 }
 
-#searchBox input{
-  
+#searchBox #searchBar{
   width: 40%;
   height: 50%;
   border-radius: 5px 0 0 5px;
+  padding-left: 10px;
   border: 0.1px solid rgb(109, 109, 109);
 }
 
+/***********************************************************************************************/
+/*price*/
+#searchBox #guion{
+  margin-left:10px;
+  margin-right:10px;
+  font-size: 20px;
+}
+
+#searchBox #from{
+  border-radius: 5px;
+}
+
+
+#searchBox .searchPrice{
+  width: 8%;
+  height: 50%;
+  border-radius: 5px 0 0 5px;
+  padding-left: 10px;
+  border: 0.1px solid rgb(109, 109, 109);
+}
+
+/***********************************************************************************************/
 #searchBox button{
   border: 0;
   width: 5%;
@@ -50,6 +72,24 @@
   margin: 0;
   background-color: #8335ff;
 }
+
+#searchBox input[type=checkbox]{ 
+  width: 25px;
+  height: 25px;
+  margin-left:20px;
+}
+
+#searchBox .seacrhLabel{ 
+  height: 25px;
+  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left:10px;
+}
+
+
+/******************************************************************/
 
 #opt{
   width: 15%;

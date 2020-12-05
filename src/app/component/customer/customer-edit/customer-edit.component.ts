@@ -26,7 +26,7 @@ export class CustomerEditComponent implements OnInit {
   ngOnInit(): void {
     //obtengo los parametros de la url
     let params = this.activedRoute.params['_value'];
-    this.email = params.email
+    this.email = params.email;
     console.log(this.email);
 
     //traigo los enables

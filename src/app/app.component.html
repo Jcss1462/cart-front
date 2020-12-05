@@ -1,5 +1,5 @@
 <!-- Toolbar -->
-<div class="toolbar" role="banner">
+<div class="toolbar" role="banner" (click)="closOptAniwhere()">
 
   <div id="iconBox">
     <i class="fas fa-star-half-alt"></i>
@@ -8,12 +8,22 @@
   <div class="space"></div>
 
   <div id="searchBox">
-    <input type="text">
-    <button><i class="fas fa-search"></i></button>
+    <input id="searchBar" ng *ngIf="isPrecio==false"type="text" [(ngModel)]="query">
+
+    <!--priceSearch-->
+    <input id="from" type="text" class="searchPrice" ng *ngIf="isPrecio==true"type="number" [(ngModel)]="priceFrom" placeholder="from">
+    <label id="guion" *ngIf="isPrecio==true">-</label>
+    <input type="text" class="searchPrice" ng *ngIf="isPrecio==true" type="number" [(ngModel)]="priceTo"  placeholder="to">
+    <!------------------------------------------------------------------------->
+    
+    <button (click)="search()"><i class="fas fa-search"></i></button>
+    
+    <input type="checkbox"  value="second_checkbox" [(ngModel)]="all" (click)="searchParams()"> <label class="seacrhLabel">All</label>
+    <input type="checkbox"  value="second_checkbox" [(ngModel)]="isName" (click)="searchParams()"> <label class="seacrhLabel">Nombre</label>
+    <input type="checkbox"  value="second_checkbox" [(ngModel)]="isDescription" (click)="searchParams()"> <label class="seacrhLabel">Descripcion</label>
+    <input type="checkbox"  value="second_checkbox" [(ngModel)]="isPrecio" (click)="searchParams()"> <label class="seacrhLabel">Preio</label>
+
   </div>
-
-
-
 
   <!----------------------------- Borrar despues----------------->
   <!--solo muestra estas opciones si esta autenticado-->

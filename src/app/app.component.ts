@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PesosTransformPipe } from './pipes/pesos-transform.pipe';
 import { CartService } from './service/cart.service';
 
 @Component({
@@ -10,34 +11,124 @@ import { CartService } from './service/cart.service';
 export class AppComponent {
   title = 'cart-front';
 
-  constructor(public cartService: CartService, public router:Router) { }
+  public priceFrom: number;
+  public priceTo: number;
+  public query: string;
 
-  public isAuth():boolean{
+  public all: boolean;
+  public isName: boolean;
+  public isDescription: boolean;
+  public isPrecio: boolean;
+
+  constructor(public cartService: CartService, public router: Router) {
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    }
+  }
+
+  ngOnInit(): void {
+    //seteo los parametros de busquedad
+    this.all = true;
+    this.isName = false;
+    this.isDescription = false
+    this.isPrecio = false;
+
+    this.query = "";
+
+    this.priceFrom = null;
+    this.priceTo = null;
+
+  }
+
+  public isAuth(): boolean {
     //si el elemento esta retorna true, y si no false
     return !!localStorage.getItem('usuario');
   }
 
   public activarOpt(): void {
-    let activador= document.getElementById("selectSpace");
+    let activador = document.getElementById("selectSpace");
     activador.classList.toggle('active');
   }
 
+  public closOptAniwhere(): void {
+
+  }
+
   public goToShopingProduct(): void {
-    let em=JSON.parse(localStorage.getItem("usuarioInfo")).email;
-    this.cartService.getCurrentCart(em).subscribe(data=>{
-      
+    let em = JSON.parse(localStorage.getItem("usuarioInfo")).email;
+    this.cartService.getCurrentCart(em).subscribe(data => {
+
       //console.log(data);
 
       //redirigir
-      this.router.navigate(['/ShopingProductInfo',data.carId]);
+      this.router.navigate(['/ShopingProductInfo', data.carId]);
 
-    },error=>{
+    }, error => {
       //si hay error, lo imprimo en la consola
       console.error(error)
-    });    
+    });
   }
 
-  
+
+  public searchParams() {
+    if (this.isName == false) {
+      this.all = false;
+      this.isDescription = false;
+      this.isPrecio = false;
+    }
+    if (this.isDescription == false) {
+      this.all = false;
+      this.isName = false;
+      this.isPrecio = false;
+    }
+
+    if (this.isPrecio == false) {
+      this.all = false;
+      this.isName = false;
+      this.isDescription = false;
+    }
+
+    if (this.all == false) {
+      this.isName = false;
+      this.isDescription = false;
+      this.isPrecio = false;
+    }
+
+  }
+
+  //busqueda
+  public search(): void {
+    if (this.isName == false && this.isDescription == false && this.isPrecio == false) {
+      this.router.navigate(['/store']);
+    }
+
+    if (this.isName == true) {
+      if (this.query == null || this.query == undefined) {
+        this.query = "";
+      }
+      this.router.navigate(['/store', "name", this.query]);
+    }
+
+    if (this.isDescription == true) {
+      if (this.query == null || this.query == undefined) {
+        this.query = "";
+      }
+      this.router.navigate(['/store', "description", this.query]);
+    }
+    
+    if (this.isPrecio == true) {
+
+      if (this.priceFrom == null || this.priceFrom == undefined) {
+        this.priceFrom = 0;
+      }
+
+      if (this.priceTo == null || this.priceTo == undefined) {
+        this.priceTo = 0;
+      }
+
+      this.router.navigate(['/store', "precio", this.priceFrom, this.priceTo]);
+    }
+  }
 
 
 }

@@ -53,4 +53,17 @@ export class ProductService {
     return this.httpClient.get(this.url + 'findAllEnable', { headers: this.headers });
   }
 
+  public findByName(name:string): Observable<any> {
+    return this.httpClient.get(this.url + 'findByName/'+name, { headers: this.headers });
+  }
+  
+  public findByDetail(detail:string): Observable<any> {
+    return this.httpClient.get(this.url + 'findByDetail/'+detail, { headers: this.headers });
+  }
+
+  public findByPrice(priceFrom:Number, priceTo:Number): Observable<any> {
+    return this.httpClient.get(this.url + 'findByPrice/'+priceFrom+"/"+priceTo, { headers: this.headers });
+  }
+
+
 }

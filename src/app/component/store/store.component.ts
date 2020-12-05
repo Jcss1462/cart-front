@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NewProduct } from 'src/app/domain/newProduct';
 import { Product } from 'src/app/domain/product';
 import { CartService } from 'src/app/service/cart.service';
@@ -18,11 +19,35 @@ export class StoreComponent implements OnInit {
 
   public newProduct: NewProduct;
 
+  public queryType: string;
+
   //inyecto el servicio
-  constructor(public productService: ProductService, public cartService: CartService) { }
+  constructor(public productService: ProductService, public cartService: CartService, public activedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.findAllEnable();
+
+    //obtengo los parametros de la url
+    let params = this.activedRoute.params['_value'];
+    this.queryType = params.queryType;
+
+    console.log(this.queryType);
+
+    if (this.queryType == undefined) {
+      this.findAllEnable();
+    }
+
+    if (this.queryType == "name") {
+      this.findByName(params.query);
+    }
+
+    if (this.queryType == "description") {
+      this.findByDetail(params.query);
+    }
+
+    if (this.queryType == "precio") {
+      this.findByPrice(params.queryFrom,params.queryTo);
+    }
+
     this.productView = null;
   }
 
@@ -30,6 +55,39 @@ export class StoreComponent implements OnInit {
     //hago la consulta y guardo los resultados
     //envio una variable para los datos y otra para los errores
     this.productService.findAllEnable().subscribe(data => {
+      this.products = data;
+    }, error => {
+      //si hay error, lo imprimo en la consola
+      console.error(error)
+    });
+  }
+
+  findByName(query: string): void {
+    //hago la consulta y guardo los resultados
+    //envio una variable para los datos y otra para los errores
+    this.productService.findByName(query).subscribe(data => {
+      this.products = data;
+    }, error => {
+      //si hay error, lo imprimo en la consola
+      console.error(error)
+    });
+  }
+
+  findByDetail(query: string): void {
+    //hago la consulta y guardo los resultados
+    //envio una variable para los datos y otra para los errores
+    this.productService.findByDetail(query).subscribe(data => {
+      this.products = data;
+    }, error => {
+      //si hay error, lo imprimo en la consola
+      console.error(error)
+    });
+  }
+
+  findByPrice(priceFrom: number, priceTo: number): void {
+    //hago la consulta y guardo los resultados
+    //envio una variable para los datos y otra para los errores
+    this.productService.findByPrice(priceFrom, priceTo).subscribe(data => {
       this.products = data;
     }, error => {
       //si hay error, lo imprimo en la consola
