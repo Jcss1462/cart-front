@@ -148,7 +148,7 @@
   margin-left: 10%;
   width: 75%;
   height: 40%;
-  background-color: #310874;
+  background-color: #7e44db;
   display: flex;
   justify-content: left;
   align-items: center;
@@ -157,7 +157,7 @@
 
 #opt #selectSpace .item:hover{
   cursor: pointer;
-  background-color: #480caa;
+  background-color: #330877;
 }
  
 button{

@@ -91,6 +91,19 @@ export class ShopingProductInfoComponent implements OnInit {
     });
   }
 
+  public clearCart(){
+    //pago el carro
+    this.cartService.clearCart(this.shopingCartInfo.carId).subscribe(ok=>{
+      console.log(ok)
+      alert("Carro limpiado exitoxamente");
+      //recargo
+      this.ngOnInit();
+      
+    },err=>{
+      alert(err.error.error);
+    });
+  }
+
 
   //dialog comfirm
   openView() {

@@ -1,4 +1,4 @@
-<div id="container" (click)="closeAniwhere($event)">
+<div id="container" *ngIf="shopingCartInfo">
 
     <div id="productsView">
 
@@ -11,7 +11,7 @@
                 <div class="titleText"><b>Producto/Precio</b></div>
                 <div class="titleText"><b>Cantidad añadida</b></div>
                 <div class="titleText"><b>Costo total</b></div>
-                <div class="delText"></div>
+                <div *ngIf="shopingCartInfo.enable=='Y'" class="delText"><i (click)="clearCart()" class="fas fa-broom"></i></div>
 
             </div>
             <div class="item" *ngFor="let shopingProduct of shopingProducts">
@@ -21,7 +21,7 @@
                 <div id="ProductName" class="infoText"><b>{{shopingProduct.proName}}<br>{{shopingProduct.price|pesosTransform}}</b></div>
                 <div id="Cantidad" class="infoText"><b>X{{shopingProduct.quantity}}</b></div>
                 <div id="total" class="infoText"><b>{{shopingProduct.total|pesosTransform}}</b></div>
-                <div id="delete" class="delet"><b><i class="far fa-trash-alt"  (click)="removeProduct(shopingProduct.proId)"></i></b></div>
+                <div *ngIf="shopingCartInfo.enable=='Y'" id="delete" class="delet"><b><i class="far fa-trash-alt"  (click)="removeProduct(shopingProduct.proId)"></i></b></div>
             </div>
 
         </div>
@@ -43,7 +43,7 @@
 
             <div id="payBox">
 
-                <form #PayForm="ngForm">
+                <form *ngIf="shopingCartInfo.enable=='Y'" #PayForm="ngForm">
                     <input  type="number" name="numberCart" id="numberCart" #numberCart placeholder="# tarjeta" [(ngModel)]="payCartData.cartNumber"/>
                     <select name="enable" id="enable" #enable  [(ngModel)]="payCartData.payId" >
                         <option value=null disabled selected>Método de pago</option>
@@ -52,6 +52,18 @@
                     <br>
                     <button (click)="openView()">Comprar</button>
                 </form>
+
+                <div id="infoPay" *ngIf="shopingCartInfo.enable=='N'">
+                    
+                    #Tarjeta:
+                    <br>
+                    <h2>{{shopingCartInfo.cartNumber}}</h2>
+                    <br>
+                    Metodo de pago:
+                    <br>
+                    <h2>{{shopingCartInfo.payName}}</h2>
+                    
+                </div>
 
             </div>
 

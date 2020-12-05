@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { PesosTransformPipe } from './pipes/pesos-transform.pipe';
+import { AuthService } from './service/auth.service';
 import { CartService } from './service/cart.service';
 
 @Component({
@@ -20,7 +21,7 @@ export class AppComponent {
   public isDescription: boolean;
   public isPrecio: boolean;
 
-  constructor(public cartService: CartService, public router: Router) {
+  constructor(public cartService: CartService, public router: Router, public authService :AuthService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
     }
@@ -67,6 +68,16 @@ export class AppComponent {
       //si hay error, lo imprimo en la consola
       console.error(error)
     });
+  }
+
+  public goToHistory(): void {
+    //redirijo al historial
+    let em = JSON.parse(localStorage.getItem("usuarioInfo")).email;
+    this.router.navigate(['/historyCart', em]);
+
+    //cierro el menu
+    let activador = document.getElementById("selectSpace");
+    activador.classList.toggle('active');
   }
 
 
@@ -128,6 +139,15 @@ export class AppComponent {
 
       this.router.navigate(['/store', "precio", this.priceFrom, this.priceTo]);
     }
+  }
+
+  public logOut(){
+    this.authService.logOutFirebase().then(()=>{
+      alert("secionCerrada")
+      this.router.navigate(['/login'])
+    }).catch((e)=>{
+      alert(e)
+    });
   }
 
 

@@ -61,5 +61,14 @@ export class CartService {
     return this.httpClient.put(this.url+'payCart',payCartData,{headers:this.headers});
   }
 
+  public historyCart(email:string):Observable<any>{
+    return this.httpClient.get(this.url+'historyCart/'+email,{headers:this.headers});
+  }
+
+  public clearCart(cartId:Number):Observable<any>{
+    return this.httpClient.delete(this.url+'clearCart/'+cartId,{headers:this.headers});
+  }
+
+
 
 }

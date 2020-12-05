@@ -1,0 +1,18 @@
+<div id="container">
+
+    <table>
+        <tr>
+            <th>#</th>
+            <th>Cantidad de articulos comprados</th>
+            <th>Metodo de pago</th>
+            <th>Toltal pagado</th>
+        </tr>
+        <tr class="item" *ngFor="let shopingCart of shopingCarts; index as i" (click)="redirectShopingProduct(shopingCart.carId)">
+            <td>{{i+1}}</td>
+            <td>{{shopingCart.items}}</td>
+            <td>{{shopingCart.payName}}</td>
+            <td>{{shopingCart.total|pesosTransform}}</td>
+        </tr>
+    </table>
+
+</div>

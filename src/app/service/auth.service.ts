@@ -49,7 +49,10 @@ export class AuthService {
     return this.angularFireAuth.signInWithEmailAndPassword(user.username,user.password);
   }
 
-  public logOutFirebase(user:User){
+  public logOutFirebase(){
+    localStorage.removeItem('usuario');
+    localStorage.removeItem('usuarioInfo');
+    localStorage.removeItem('token');
     return this.angularFireAuth.signOut();
   }
 
