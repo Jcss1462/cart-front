@@ -1,29 +1,37 @@
-<br>
-<i routerLink="/customer-save" class="fas fa-plus-square"></i>
-<h3>{{titulo}}</h3>
+<div id="container">
 
-<div *ngIf="showMsg">
-    <p *ngFor="let msg of messages">
-        {{msg}}
-    </p>
+    <div id="tableContainer">
+
+        <br>
+        <i routerLink="/customer-save" class="fas fa-plus-square"></i>
+        <h3>{{titulo}}</h3>
+
+        <div *ngIf="showMsg">
+            <p *ngFor="let msg of messages">
+                {{msg}}
+            </p>
+        </div>
+
+
+        <table>
+            <tr>
+                <td><b>Email</b></td>
+                <td><b>Name</b></td>
+                <td><b>Enable</b></td>
+                <td><b>Opción</b></td>
+            </tr>
+
+            <tr class="item" *ngFor="let customer of customers">
+                <td>{{customer.email}}</td>
+                <td>{{customer.name}}</td>
+                <td>{{customer.enable}}</td>
+                <td>
+                    <i [routerLink]="['/customer-edit',customer.email]"class="fas fa-edit"></i>
+                    <!--<button (click)="delete(customer.email)">Borrar</button>-->
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
 </div>
-
-
-<table>
-    <tr>
-        <td><b>Email</b></td>
-        <td><b>Name</b></td>
-        <td><b>Enable</b></td>
-        <td><b>Opción</b></td>
-    </tr>
-
-    <tr *ngFor="let customer of customers">
-        <td>{{customer.email}}</td>
-        <td>{{customer.name}}</td>
-        <td>{{customer.enable}}</td>
-        <td>
-            <a [routerLink]="['/customer-edit',customer.email]">Editar</a>
-            <button (click)="delete(customer.email)">Borrar</button>
-        </td>
-    </tr>
-</table>

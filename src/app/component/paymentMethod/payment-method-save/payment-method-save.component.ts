@@ -37,14 +37,9 @@ export class PaymentMethodSaveComponent implements OnInit {
   public save():void{
     this.messages=[""];
     this.paymentMthodService.save(this.paymentMethod).subscribe(ok=>{
-      //si todo sale bien activo los mensajes
-      this.showMsg=true;
-      this.messages[0]="El paymentMethod se grabo con exito con el payId= "+ok.payId;
+      alert("El paymentMethod se grabo con exito con el payId= "+ok.payId);
     },err=>{
-      //si algo sale mal activo los mensajes
-      //el segundo error el del back
-      this.showMsg=true;
-      this.messages=err.error.error;
+      alert(err.error.error);
     });
   }
 

@@ -1,32 +1,53 @@
-<div *ngIf="customer">
+<div id="container">
 
-    <div *ngIf="showMsg">
-        <p *ngFor="let msg of messages">
-            {{msg}}
-        </p>
+    <div id="fromBox">
+
+        <div *ngIf="customer">
+
+            <div *ngIf="showMsg">
+                <p *ngFor="let msg of messages">
+                    {{msg}}
+                </p>
+            </div>
+
+            <form #CustomerForm="ngForm">
+                <h2>Edit</h2>
+                <!--el # es un elemento especial de angular-->
+                <!--ng-model, escribe inmediatamente en la variable al escribir en el campo-->
+                <b>email</b>
+                <input readonly type="email" name="email" id="email" #email placeholder="Email"
+                    [(ngModel)]="customer.email" />
+                <br>
+                <b>Name</b>
+                <input type="name" name="name" id="name" #name placeholder="Name" [(ngModel)]="customer.name" />
+                <br>
+                <b>Address</b>
+                <input type="addres" name="addres" id="addres" #addres placeholder="Addres"
+                    [(ngModel)]="customer.address" />
+                <br>
+                <b>Phone</b>
+                <input type="phone" name="phone" id="phone" #phone placeholder="Phone" [(ngModel)]="customer.phone" />
+                <br>
+                <b>Password</b>
+                <input type="password" name="token" id="token" #token placeholder="Token" [(ngModel)]="customer.token" />
+                <br>
+                <b>Enable</b>
+                <br>
+                <select name="enable" id="enable" #enable [(ngModel)]="customer.enable">
+                    <!--value es el valor que se va a mandar-->
+                    <option *ngFor="let enable of enables" [value]="enable.id">{{enable.name}}</option>
+                </select>
+                <br>
+                <br>
+                <br>
+                <button (click)="update()">Update</button>
+                <!--<button (click)="delete()">Delete</button>-->
+                <button routerLink="/customer-list">Cancel</button>
+            </form>
+
+        </div>
+
     </div>
 
-    <form #CustomerForm="ngForm">
-        <!--el # es un elemento especial de angular-->
-        <!--ng-model, escribe inmediatamente en la variable al escribir en el campo-->
-        <input readonly type="email" name="email" id="email" #email placeholder="Email" [(ngModel)]="customer.email" />
-        <br>
-        <input type="name" name="name" id="name" #name placeholder="Name" [(ngModel)]="customer.name" />
-        <br>
-        <input type="addres" name="addres" id="addres" #addres placeholder="Addres" [(ngModel)]="customer.address" />
-        <br>
-        <input type="phone" name="phone" id="phone" #phone placeholder="Phone" [(ngModel)]="customer.phone" />
-        <br>
-        <input type="token" name="token" id="token" #token placeholder="Token" [(ngModel)]="customer.token" />
-        <br>
-        <select name="enable" id="enable" #enable [(ngModel)]="customer.enable">
-            <!--value es el valor que se va a mandar-->
-            <option *ngFor="let enable of enables" [value]="enable.id">{{enable.name}}</option>
-        </select>
-        <br>
-        <button (click)="update()">Update</button>
-        <button (click)="delete()">Delete</button>
-        <button routerLink="/customer-list">Cancel</button>
-    </form>
 
 </div>

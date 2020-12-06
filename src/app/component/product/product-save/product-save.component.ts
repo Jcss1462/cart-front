@@ -35,14 +35,9 @@ export class ProductSaveComponent implements OnInit {
   public save(): void {
     this.messages = [""];
     this.productSave.save(this.product).subscribe(ok => {
-      //si todo sale bien activo los mensajes
-      this.showMsg = true;
-      this.messages[0] = "El producto se grabo con exito";
+      alert("El producto se grabo con exito");
     }, err => {
-      //si algo sale mal activo los mensajes
-      //el segundo error el del back
-      this.showMsg = true;
-      this.messages = err.error.error;
+      alert(err.error.error);
     });
   }
 

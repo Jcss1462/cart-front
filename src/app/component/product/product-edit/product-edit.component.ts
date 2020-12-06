@@ -52,14 +52,11 @@ export class ProductEditComponent implements OnInit {
   public update():void{
     this.messages=[""];
     this.productService.update(this.product).subscribe(ok=>{
-      //si todo sale bien activo los mensajes
-      this.showMsg=true;
-      this.messages[0]="El producto se actualizo con exito";
+      
+      alert("El producto se actualizo con exito");
     },err=>{
-      //si algo sale mal activo los mensajes
-      //el segundo error el del back
-      this.showMsg=true;
-      this.messages=err.error.error;
+  
+      alert(err.error.error);
     });
   }
 

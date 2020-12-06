@@ -60,5 +60,10 @@ export class AuthService {
     await (await this.angularFireAuth.currentUser).sendEmailVerification();
   }
 
+  public async updatePassword(newPassword: string){
+    await (await this.angularFireAuth.currentUser).updatePassword(newPassword);;
+  }
+
+  
 
 }

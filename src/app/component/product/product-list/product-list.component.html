@@ -1,21 +1,33 @@
-<br>
-<i routerLink="/product-save" class="fas fa-plus-square"></i>
-<h3>{{titulo}}</h3>
+<div id="container">
 
-<table>
-    <tr>
-        <td><b>proId</b></td>
-        <td><b>Name</b></td>
-        <td><b>Enable</b></td>
-        <td><b>Opción</b></td>
-    </tr>
+    <div id="tableContainer">
 
-    <tr *ngFor="let product of products">
-        <td>{{product.proId}}</td>
-        <td>{{product.name}}</td>
-        <td>{{product.enable}}</td>
-        <td>
-            <a [routerLink]="['/product-edit',product.proId]">Editar</a>
-        </td>
-    </tr>
-</table>
+
+        <br>
+        <i routerLink="/product-save" class="fas fa-plus-square"></i>
+        <h3>{{titulo}}</h3>
+
+        <table>
+            <tr>
+                <td><b>proId</b></td>
+                <td><b>Imagen</b></td>
+                <td><b>Name</b></td>
+                <td><b>Enable</b></td>
+                <td><b>Opción</b></td>
+            </tr>
+
+            <tr class="item"  *ngFor="let product of products">
+                <td>{{product.proId}}</td>
+                <td class="imgBox"><img src="{{product.image}}" alt=""></td>
+                <td>{{product.name}}</td>
+                <td>{{product.enable}}</td>
+                <td>
+                    <i [routerLink]="['/product-edit',product.proId]" class="fas fa-edit"></i>
+                    <!--a [routerLink]="['/product-edit',product.proId]">Editar</a>-->
+                </td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
