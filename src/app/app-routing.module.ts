@@ -13,6 +13,7 @@ import { LoginComponent } from './component/login/login.component';
 import { StoreComponent } from './component/store/store.component';
 import { ShopingProductInfoComponent } from './component/cart/shoping-product-info/shoping-product-info.component';
 import { HistoryCartComponent } from './component/cart/history-cart/history-cart.component';
+import { CustomerEditEnableComponent } from './component/customer/customer-edit-enable/customer-edit-enable.component';
 
 
 //usrare el guard de firebase
@@ -25,7 +26,7 @@ const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(['login']);
 const routes: Routes = [
   //rutas que requieren de autenticacion para acceder
   {path:'customer-list',component:CustomerListComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'customer-save',component:CustomerSaveComponent},
+  
   {path:'customer-edit/:email',component:CustomerEditComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   {path:'product-list',component:ProductListComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   {path:'product-save',component:ProductSaveComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
@@ -41,6 +42,10 @@ const routes: Routes = [
   {path:'ShopingProductInfo/:carId',component:ShopingProductInfoComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   {path:'historyCart/:email',component:HistoryCartComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
 
+  {path:'customerEditEnable/:email',component: CustomerEditEnableComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+
+  
+  {path:'customer-save',component:CustomerSaveComponent},
   {path:'login',component:LoginComponent},
   {path:'',component:LoginComponent}
 ];

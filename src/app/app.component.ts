@@ -150,5 +150,14 @@ export class AppComponent {
     });
   }
 
+  public editUser(){
+    let em = JSON.parse(localStorage.getItem("usuarioInfo")).email;
+    this.router.navigate(['/customer-edit',em]);
+
+    //cierro el menu
+    let activador = document.getElementById("selectSpace");
+    activador.classList.toggle('active');
+  }
+
 
 }

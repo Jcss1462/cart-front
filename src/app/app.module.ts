@@ -30,6 +30,7 @@ import {environment} from 'src/environments/environment';
 
 import { PesosTransformPipe } from './pipes/pesos-transform.pipe';
 import { HistoryCartComponent } from './component/cart/history-cart/history-cart.component';
+import { CustomerEditEnableComponent } from './component/customer/customer-edit-enable/customer-edit-enable.component';
 
 
 
@@ -51,6 +52,7 @@ import { HistoryCartComponent } from './component/cart/history-cart/history-cart
     PesosTransformPipe,
     ShopingProductInfoComponent,
     HistoryCartComponent,
+    CustomerEditEnableComponent,
   ],
   imports: [
     BrowserModule,
