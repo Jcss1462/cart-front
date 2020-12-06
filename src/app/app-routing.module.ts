@@ -18,6 +18,7 @@ import { CustomerEditEnableComponent } from './component/customer/customer-edit-
 
 //usrare el guard de firebase
 //import { AuthGuard } from './guard/auth.guard';
+import { AdminGuard } from './guard/admin.guard';
 
 import { AngularFireAuthGuard, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 //si no esta autorizado envio al login
@@ -25,15 +26,15 @@ const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(['login']);
 
 const routes: Routes = [
   //rutas que requieren de autenticacion para acceder
-  {path:'customer-list',component:CustomerListComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  
-  {path:'customer-edit/:email',component:CustomerEditComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'product-list',component:ProductListComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'product-save',component:ProductSaveComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'product-edit/:proId',component:ProductEditComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'payment-list',component:PaymentMethodComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'payment-save',component:PaymentMethodSaveComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-  {path:'payment-edit/:payId',component:PaymentMethodEditComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'customer-list',component:CustomerListComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'customerEditEnable/:email',component: CustomerEditEnableComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'product-list',component:ProductListComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'product-save',component:ProductSaveComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'product-edit/:proId',component:ProductEditComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'payment-list',component:PaymentMethodComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'payment-save',component:PaymentMethodSaveComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+  {path:'payment-edit/:payId',component:PaymentMethodEditComponent,canActivate:[AngularFireAuthGuard,AdminGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
+
   
   {path:'store',component:StoreComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   {path:'store/:queryType/:query',component:StoreComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
@@ -42,10 +43,8 @@ const routes: Routes = [
   {path:'ShopingProductInfo/:carId',component:ShopingProductInfoComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   {path:'historyCart/:email',component:HistoryCartComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
 
-  {path:'customerEditEnable/:email',component: CustomerEditEnableComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
-
-  
   {path:'customer-save',component:CustomerSaveComponent},
+  {path:'customer-edit/:email',component:CustomerEditComponent,canActivate:[AngularFireAuthGuard],data:{authGuardPipe:redirectUnauthorizedToLogin}},
   {path:'login',component:LoginComponent},
   {path:'',component:LoginComponent}
 ];

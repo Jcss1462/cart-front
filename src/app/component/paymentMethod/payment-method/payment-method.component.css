@@ -26,6 +26,31 @@
 
 }
 
+
+
+#container #tableContainer .opt{
+    background-color: white;
+}
+
+#container #tableContainer .opt button{
+    margin-right: 15px;
+    margin-bottom: 5px;
+    background-color: rgb(255, 222, 36); /* Green */
+    border-radius: 5px;
+    border: none;
+    color: rgb(8, 8, 8);
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+
+#container #tableContainer .opt button:hover{
+    cursor: pointer;
+    background-color: rgb(184, 160, 28); /* Green */
+}
+
 table{
     width: 800px;
     border-collapse: collapse;

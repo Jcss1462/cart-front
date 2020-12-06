@@ -53,9 +53,9 @@ export class LoginComponent implements OnInit {
             this.customerService.findByIdWithHeaders(this.userToken.username).subscribe(userInfo => {
               localStorage.setItem("usuarioInfo", JSON.stringify(userInfo));
               if(userInfo.customerType==1){
-                this.router.navigate(['/store']);
+                this.router.navigate(['/customer-list']);
               }else{
-                this.router.navigate(['/customer-save']);
+                this.router.navigate(['/store']);
               }
 
             },e=>{

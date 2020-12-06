@@ -2,17 +2,18 @@
 
     <div id="tableContainer">
 
-        <br>
-        <i routerLink="/customer-save" class="fas fa-plus-square"></i>
-        <h3>{{titulo}}</h3>
+        <div style="position: sticky; top: 0;" class="opt">
+            <button routerLink="/product-list"><b>Product-List</b></button>
+            <button routerLink="/payment-list"><b>PaymentMethod-List</b></button>
 
-        <div *ngIf="showMsg">
-            <p *ngFor="let msg of messages">
-                {{msg}}
-            </p>
+            <br>
+            <i routerLink="/customer-save" class="fas fa-plus-square"></i>
+            
+
         </div>
 
-
+    
+        <h3>{{titulo}}</h3>
         <table>
             <tr>
                 <td><b>Email</b></td>
@@ -26,7 +27,7 @@
                 <td>{{customer.name}}</td>
                 <td>{{customer.enable}}</td>
                 <td>
-                    <i [routerLink]="['/customerEditEnable',customer.email]"class="fas fa-edit"></i>
+                    <i [routerLink]="['/customerEditEnable',customer.email]" class="fas fa-edit"></i>
                     <!--<button (click)="delete(customer.email)">Borrar</button>-->
                 </td>
             </tr>
