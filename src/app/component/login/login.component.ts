@@ -57,6 +57,7 @@ export class LoginComponent implements OnInit {
               }else{
                 this.router.navigate(['/store']);
               }
+              
 
             },e=>{
               alert("error encontrndo el usuario en el back "+e.message);

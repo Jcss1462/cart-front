@@ -38,6 +38,7 @@
     </div>
     <div id="selectSpace">
         <div class="item" (click)="goToHistory()">Historial de compras</div>
+        <div *ngIf="customerInfo.customerType==1" class="item" (click)="goCustomerList()">Admin settings</div>
         <div class="item" (click)="editUser()">Editar usuario</div>
         <div class="item" (click)="logOut()">Log out</div>
     </div>

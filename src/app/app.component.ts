@@ -21,6 +21,8 @@ export class AppComponent {
   public isDescription: boolean;
   public isPrecio: boolean;
 
+  public customerInfo;
+
   constructor(public cartService: CartService, public router: Router, public authService :AuthService) {
     this.router.routeReuseStrategy.shouldReuseRoute = function () {
       return false;
@@ -38,6 +40,8 @@ export class AppComponent {
 
     this.priceFrom = null;
     this.priceTo = null;
+
+    this.customerInfo=JSON.parse(localStorage.getItem("usuarioInfo"));
 
   }
 
@@ -157,6 +161,10 @@ export class AppComponent {
     //cierro el menu
     let activador = document.getElementById("selectSpace");
     activador.classList.toggle('active');
+  }
+
+  public goCustomerList(){
+    this.router.navigate(['/customer-list']);
   }
 
 
