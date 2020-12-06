@@ -43,11 +43,16 @@ export class CustomerService {
   }
 
   public save(customer:Customer):Observable<any>{
-    return this.httpClient.post(this.url+'save',customer,{headers:this.headers});
+    return this.httpClient.post(this.url+'save',customer);
   }
 
   public update(customer:Customer):Observable<any>{
     return this.httpClient.put(this.url+'update',customer,{headers:this.headers});
+  }
+
+  public updateCreate(customer:Customer, token:string):Observable<any>{
+    let headersIntern= new HttpHeaders({'Authorization':token});
+    return this.httpClient.put(this.url+'update',customer,{headers:headersIntern});
   }
 
   public deletete(email:string):Observable<any>{
