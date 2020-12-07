@@ -3,9 +3,9 @@
     <table>
         <tr>
             <th>#</th>
-            <th>Cantidad de articulos comprados</th>
-            <th>Metodo de pago</th>
-            <th>Toltal pagado</th>
+            <th>Cantidad de artículos comprados</th>
+            <th>Método de pago</th>
+            <th>Total pagado</th>
         </tr>
         <tr class="item" *ngFor="let shopingCart of shopingCarts; index as i" (click)="redirectShopingProduct(shopingCart.carId)">
             <td>{{i+1}}</td>
