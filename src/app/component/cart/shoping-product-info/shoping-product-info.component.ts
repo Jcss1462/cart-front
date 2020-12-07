@@ -16,17 +16,17 @@ export class ShopingProductInfoComponent implements OnInit {
 
   public shopingProducts: ShopingProduct[];
   public paymentMethodList: PaymentMethod[];
-  public carId:string;
-  public shopingCartInfo:ShopingCart;
+  public carId: string;
+  public shopingCartInfo: ShopingCart;
 
-  public payCartData:PayCartData;
+  public payCartData: PayCartData;
 
 
   constructor(public router: Router,
     public activedRoute: ActivatedRoute,
     public cartService: CartService,
     public paymentMethod: PaymentMethodService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
     //obtengo los parametros de la url
@@ -35,9 +35,9 @@ export class ShopingProductInfoComponent implements OnInit {
     console.log(this.carId);
 
     //obtengo la informacion del shoping cart
-    this.cartService.getShopingCartById(this.carId).subscribe(ok=>{
-      this.shopingCartInfo=ok;
-    },err=>{
+    this.cartService.getShopingCartById(this.carId).subscribe(ok => {
+      this.shopingCartInfo = ok;
+    }, err => {
       alert(err.error.error)
     });
 
@@ -49,57 +49,66 @@ export class ShopingProductInfoComponent implements OnInit {
     this.getPaymentMethodnables();
 
     //seteo la informacion de pago en vacio
-    this.payCartData=new PayCartData(null,null,null);
+    this.payCartData = new PayCartData(null, null, null);
   }
 
-  public getSopingProducts(){
-    this.cartService.getShopingProducts(this.carId).subscribe(ok=>{
-      this.shopingProducts=ok;
-    },err=>{
+  public getSopingProducts() {
+    this.cartService.getShopingProducts(this.carId).subscribe(ok => {
+      this.shopingProducts = ok;
+    }, err => {
       alert(err.error.error)
     });
   }
 
-  public getPaymentMethodnables(){
-    this.paymentMethod.findByEnable().subscribe(ok=>{
-      this.paymentMethodList=ok;
-    },err=>{
+  public getPaymentMethodnables() {
+    this.paymentMethod.findByEnable().subscribe(ok => {
+      this.paymentMethodList = ok;
+    }, err => {
       alert(err.error.error)
     });
   }
 
-  public removeProduct(proId:string){
-    this.cartService.removeProduct(this.shopingCartInfo.carId,proId).subscribe(ok=>{
+  public removeProduct(proId: string) {
+    this.cartService.removeProduct(this.shopingCartInfo.carId, proId).subscribe(ok => {
       alert("producto eliminado exitozamente");
       this.ngOnInit();
-    },err=>{
+    }, err => {
       alert(err.error.error)
     });
   }
 
-  public payCart(){
-    //seteo el cartId
-    this.payCartData.cartId=this.shopingCartInfo.carId;
-    //pago el carro
-    this.cartService.payCart(this.payCartData).subscribe(ok=>{
-      console.log(ok)
-      alert("Compra realizada satisfactoriamente");
-      //redirigir
-      this.router.navigate(['/store']);
-    },err=>{
-      alert(err.error.error);
-    });
+  public payCart() {
+
+    if (this.payCartData.cartNumber == null || this.payCartData.cartNumber == undefined) {
+      alert("Debe llenar el campo de la tarjeta de credito");
+    } else {
+      if (this.payCartData.cartNumber.toString().length < 13 || this.payCartData.cartNumber.toString().length > 18 || this.payCartData == null) {
+        alert("Lonjitud de la trajerta de credito invalida, debe tenee entre 13 y 18 caracteres");
+      } else {
+        //seteo el cartId
+        this.payCartData.cartId = this.shopingCartInfo.carId;
+        //pago el carro
+        this.cartService.payCart(this.payCartData).subscribe(ok => {
+          console.log(ok)
+          alert("Compra realizada satisfactoriamente");
+          //redirigir
+          this.router.navigate(['/store']);
+        }, err => {
+          alert(err.error.error);
+        });
+      }
+    }
   }
 
-  public clearCart(){
+  public clearCart() {
     //pago el carro
-    this.cartService.clearCart(this.shopingCartInfo.carId).subscribe(ok=>{
+    this.cartService.clearCart(this.shopingCartInfo.carId).subscribe(ok => {
       console.log(ok)
       alert("Carro limpiado exitoxamente");
       //recargo
       this.ngOnInit();
-      
-    },err=>{
+
+    }, err => {
       alert(err.error.error);
     });
   }

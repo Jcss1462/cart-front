@@ -41,13 +41,15 @@ export class AppComponent {
     this.priceFrom = null;
     this.priceTo = null;
 
-    this.customerInfo=JSON.parse(localStorage.getItem("usuarioInfo"));
+    if(localStorage.getItem("usuarioInfo")){
+      this.customerInfo=JSON.parse(localStorage.getItem("usuarioInfo"));
+    }
 
   }
 
   public isAuth(): boolean {
     //si el elemento esta retorna true, y si no false
-    return !!localStorage.getItem('usuario');
+    return !!localStorage.getItem('usuarioInfo');
   }
 
   public activarOpt(): void {
