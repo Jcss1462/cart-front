@@ -70,7 +70,7 @@ export class ShopingProductInfoComponent implements OnInit {
 
   public removeProduct(proId: string) {
     this.cartService.removeProduct(this.shopingCartInfo.carId, proId).subscribe(ok => {
-      alert("producto eliminado exitozamente");
+      alert("producto eliminado exitosamente");
       this.ngOnInit();
     }, err => {
       alert(err.error.error)
@@ -83,7 +83,7 @@ export class ShopingProductInfoComponent implements OnInit {
       alert("Debe llenar el campo de la tarjeta de credito");
     } else {
       if (this.payCartData.cartNumber.toString().length < 13 || this.payCartData.cartNumber.toString().length > 18 || this.payCartData == null) {
-        alert("Lonjitud de la trajerta de credito invalida, debe tenee entre 13 y 18 caracteres");
+        alert("Longitud de la trajerta de credito invalida, debe tener entre 13 y 18 caracteres");
       } else {
         //seteo el cartId
         this.payCartData.cartId = this.shopingCartInfo.carId;
@@ -104,7 +104,7 @@ export class ShopingProductInfoComponent implements OnInit {
     //pago el carro
     this.cartService.clearCart(this.shopingCartInfo.carId).subscribe(ok => {
       console.log(ok)
-      alert("Carro limpiado exitoxamente");
+      alert("Carro limpiado exitosamente");
       //recargo
       this.ngOnInit();
 

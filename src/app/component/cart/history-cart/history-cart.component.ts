@@ -29,7 +29,9 @@ export class HistoryCartComponent implements OnInit {
     this.cartService.historyCart(this.email).subscribe(ok=>{
       this.shopingCarts=ok;
     },err=>{
-      alert(err.error.error)
+      alert(err.error.error);
+      //si no carga al primer intento
+      //location.reload();
     });
 
   }

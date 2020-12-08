@@ -21,6 +21,9 @@ export class CustomerEditComponent implements OnInit {
   public messages: string[] = [""];
   public currentToken: string;
 
+  public isLoad:Boolean;
+
+
 
   constructor(public router: Router,
     public activedRoute: ActivatedRoute,
@@ -38,6 +41,8 @@ export class CustomerEditComponent implements OnInit {
     this.findAllEnable();
     //obtengo la informacion del  customer que accedio
     this.findById();
+
+    this.isLoad=false;
   }
 
   //lleno mi arreglo de enables con los del servicio
@@ -55,6 +60,8 @@ export class CustomerEditComponent implements OnInit {
   }
 
   public update(): void {
+    //activo la carga
+    this.isLoad=true;
     //actualizo en el firebase
     this.authService.updatePassword(this.customer.token).then(() => {
 
@@ -62,12 +69,18 @@ export class CustomerEditComponent implements OnInit {
       this.customer.token = this.currentToken;
       this.customerService.update(this.customer).subscribe(ok => {
         alert("El customer se actualizo con exito");
+        //desactivo la carga
+        this.isLoad=false;
       }, err => {
         alert(err.error.error);
+        //desactivo la carga
+        this.isLoad=false;
       });
 
     }).catch((e)=>{
       alert(e);
+      //desactivo la carga
+      this.isLoad=false;
     });
 
 

@@ -72,7 +72,9 @@ export class AppComponent {
 
     }, error => {
       //si hay error, lo imprimo en la consola
-      console.error(error)
+      console.error(error);
+      //si no carga al primer intento
+      location.reload();
     });
   }
 

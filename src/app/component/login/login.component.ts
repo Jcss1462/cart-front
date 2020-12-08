@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   public user: User;
   public userToken: User;
 
+  public isLoad:Boolean;
+
 
   //inyecto el auth service
   constructor(private router: Router, private authService: AuthService, private customerService: CustomerService) { }
@@ -26,9 +28,13 @@ export class LoginComponent implements OnInit {
     //inicializo user con valores por defecto
     this.user = new User("", "");
     this.userToken = new User("", "");
+    this.isLoad=false;
   }
 
   public ingresar(): void {
+
+    //activo la carga
+    this.isLoad=true;
 
     //inicio secion en firebase
     this.authService.loginFireBase(this.user)
@@ -37,6 +43,8 @@ export class LoginComponent implements OnInit {
         console.log(data.user.uid);
         if (data.user.emailVerified == false) {
           alert("Email no verificado");
+          //desactivo la carga
+          this.isLoad=false;
         } else {
           alert("secion firebase iniciada");
           //creo una copia del user para que el token no aparezca en el front
@@ -51,6 +59,10 @@ export class LoginComponent implements OnInit {
 
             //reviso el tipo de usuario
             this.customerService.findByIdWithHeaders(this.userToken.username).subscribe(userInfo => {
+
+              //desactivo la carga
+              this.isLoad=false;
+
               localStorage.setItem("usuarioInfo", JSON.stringify(userInfo));
               if(userInfo.customerType==1){
                 this.router.navigate(['/customer-list']);
@@ -61,17 +73,23 @@ export class LoginComponent implements OnInit {
 
             },e=>{
               alert("error encontrndo el usuario en el back "+e.message);
+              //desactivo la carga
+              this.isLoad=false;
             });
 
            
           }, err => {
             console.log("error");
             alert("error obteniendo el token"+"Usuario o clave no son validos");
+            //desactivo la carga
+            this.isLoad=false;
           });
         }
 
       }).catch(e => {
         alert("error iniciando secion firebase"+e.message);
+        //desactivo la carga
+        this.isLoad=false;
       });
 
   }
